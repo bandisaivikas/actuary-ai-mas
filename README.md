@@ -172,9 +172,9 @@ This is **Stage 3 of Research Thread 3 — Information-Aware Agentic LLM Trainin
 
 | Stage | Status | Description |
 |-------|--------|-------------|
-| 1 | ✅ Done | IB theory + Information Plane |
-| 2 | ✅ Done | Silent Inference Degradation (72% KL, 31× displacement) |
-| 3 | This project | Miscalibration + VIB Layer fix** |
+| 1 | Done | IB theory + Information Plane |
+| 2 | Done | Silent Inference Degradation (72% KL, 31× displacement) |
+| 3 | Done | Miscalibration + VIB Layer fix** |
 | 4 | Future work | POMDP + SAC Deep RL agent and CALM curiosity-driven exploration |
 
 **Paper title:**
