@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Results — keep structure, ignore large files
+results/phase3/*.json
+results/phase3/*.png
+results/phase4/*.json
+results/phase4/*.png
+results/phase5/*.pt
+results/phase5/*.json
+results/demo_history.json
+results/ground_truth_run.json
+
+# Keep .gitkeep files
+!results/**/.gitkeep
+
+# Data — generated, not committed
+data/actuarial_dataset.json
+data/split_*.json
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Secrets — never commit API keys
+.env
+*.env
+secrets.py
+
+# Streamlit
+.streamlit/
+
+# Large model files
+*.bin
+*.safetensors
+*.gguf

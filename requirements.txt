@@ -1,0 +1,23 @@
+# Core inference
+torch>=2.0.0
+numpy>=1.24.0
+
+# Streamlit demo
+streamlit>=1.32.0
+plotly>=5.18.0
+pandas>=2.0.0
+
+# HuggingFace (optional — for HF API backend)
+huggingface_hub>=0.20.0
+transformers>=4.35.0
+
+# Groq (optional — for Groq backend)
+# groq>=0.4.0
+
+# Evaluation + plots
+matplotlib>=3.7.0
+scikit-learn>=1.3.0
+
+# Quantization (Phase 4 GPU only)
+# bitsandbytes>=0.41.0
+# accelerate>=0.24.0
