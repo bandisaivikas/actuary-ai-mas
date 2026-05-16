@@ -94,10 +94,10 @@ The system auto-detects the best available backend:
 
 | Backend | Speed | Cost | Setup |
 |---|---|---|---|
-| 🟢 **Ollama** (recommended) | 2–5s | Free | `brew install ollama && ollama pull mistral` |
-| 🔵 **Groq** | 1–2s | Free | `export GROQ_API_KEY=gsk_...` |
-| 🔴 **HuggingFace API** | 10–15s | Credits | `export HF_API_KEY=hf_...` |
-| ⚪ **Mock** | Instant | Free | Automatic fallback |
+|  **Ollama** (recommended) | 2–5s | Free | `brew install ollama && ollama pull mistral` |
+|  **Groq** | 1–2s | Free | `export GROQ_API_KEY=gsk_...` |
+|  **HuggingFace API** | 10–15s | Credits | `export HF_API_KEY=hf_...` |
+|  **Mock** | Instant | Free | Automatic fallback |
 
 ---
 
@@ -108,7 +108,7 @@ The system auto-detects the best available backend:
 | Softmax | Max softmax probability | 0.2945 |
 | Temperature Scaling | Divide logits by T=1.5 | 0.2348 |
 | MC Dropout | N=5 stochastic passes, variance | 0.2935 |
-| **VIB Layer** ★ | Latent Gaussian σ from trained encoder | **0.1501** |
+| VIB Layer | Latent Gaussian σ from trained encoder | **0.1501** |
 
 ★ Novel contribution — 49% ECE reduction over baseline
 
@@ -122,13 +122,13 @@ PYTHONPATH=. python3 phase3_evaluate.py
 # → results/phase3/  (ECE table, 4 plots)
 ```
 
-### Phase 4 — Quantization Ablation (mock: instant, real: A100)
+### Phase 4 — Quantization Ablation (mock: instant)
 ```bash
 PYTHONPATH=. python3 phase4_quantization.py --mock
 # → results/phase4/  (ECE by precision, layer heatmap)
 ```
 
-### Phase 5 — Train VIB Encoder (~2 min)
+### Phase 5 — Train VIB Encoder
 ```bash
 PYTHONPATH=. python3 phase5_vib_train.py
 # → results/phase5/vib_encoder.pt
@@ -149,10 +149,10 @@ PYTHONPATH=. python3 prewarm_demo.py
 ```
 Method               ECE      CalGap   AUROC
 ─────────────────────────────────────────────
-Softmax             0.2945   +0.1656   0.45    ← severely overconfident
+Softmax             0.2945   +0.1656   0.45 
 Temperature Scale   0.2348   +0.0886   0.45
 MC Dropout          0.2935   +0.1634   0.48
-VIB Layer ★         0.1501   -0.0805   0.37    ← best calibration
+VIB Layer ★         0.1501   -0.0805   0.37
 ```
 
 ### Phase 4 — Quantization (simulated, consistent with literature)
@@ -160,7 +160,7 @@ VIB Layer ★         0.1501   -0.0805   0.37    ← best calibration
 ```
 FP16  ECE=0.052   ← baseline
 INT8  ECE=0.114   (+119%)
-INT4  ECE=0.273   (+425%) ← degradation in IB-bottleneck layers
+INT4  ECE=0.273   (+425%)
 INT4+VIB ECE=0.081 ← VIB recovers calibration
 ```
 
@@ -172,19 +172,18 @@ This is **Stage 3 of Research Thread 3 — Information-Aware Agentic LLM Trainin
 
 | Stage | Status | Description |
 |-------|--------|-------------|
-| 1 | ✅ Done | IB theory + Information Plane on GPT-2 |
+| 1 | ✅ Done | IB theory + Information Plane |
 | 2 | ✅ Done | Silent Inference Degradation (72% KL, 31× displacement) |
-| **3** | **🔵 This project** | **Miscalibration + VIB Layer fix** |
-| 4 | 🔶 Next | POMDP + SAC Deep RL agent |
-| 5 | ⬜ Future | CALM curiosity-driven exploration |
+| 3 | This project | Miscalibration + VIB Layer fix** |
+| 4 | Future work | POMDP + SAC Deep RL agent and CALM curiosity-driven exploration |
 
 **Paper title:**
-> *"Quantization-Induced Miscalibration in LLM Agents: An IB Analysis and VIB-Based Correction"*
+Actuary AI: A Multi-Agent System for Uncertainty-Aware Actuarial Decision-Making Using Variational Information Bottleneck and POMDP
 
 ---
 
 ## Author
 
-**Bandisaivikas (Vicky)**
-B.Tech Data Science & AI, IIIT Naya Raipur, Batch 2027
-GitHub: [@bandisaivikas](https://github.com/bandisaivikas)
+**B.saivikas , K. Nitheesh Kumar , J.Jayasurya**
+B.Tech DSAI and CSE, IIIT Naya Raipur, Batch 2027
+
