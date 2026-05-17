@@ -46,6 +46,8 @@ _parser.add_argument("--mock", action="store_true",
                      help="Force mock client (testing)")
 _parser.add_argument("--n", type=int, default=None,
                      help="Number of test questions (default: full set)")
+_parser.add_argument("--real_data", action="store_true",
+                     help="Use real auto insurance claims dataset")
 _ARGS, _ = _parser.parse_known_args()
 
 UQ_METHODS = ["Softmax", "Temperature Scaling", "MC Dropout", "VIB Layer"]
@@ -56,6 +58,12 @@ COLORS     = {"Softmax":"#8892B0", "Temperature Scaling":"#F0A500",
 # ── Step 0: Load or generate dataset ─────────
 
 def load_test_set() -> List[Dict]:
+    if _ARGS.real_data:
+        from data.real_data_loader import get_real_test_set
+        n_samples = _ARGS.n if _ARGS.n else 100
+        print(f"Loading real dataset (insurance_claims.csv) with {n_samples} samples...")
+        return get_real_test_set(n_samples=n_samples)
+
     test_path = "data/split_test.json"
     full_path  = "data/actuarial_dataset.json"
 
@@ -278,7 +286,8 @@ def print_comparison_table(summaries: List[Dict]):
     print(f"{'─'*90}")
 
     best_ece   = min(s["ece"]   for s in summaries)
-    best_auroc = max(s["auroc"] for s in summaries if s["auroc"])
+    valid_aurocs = [s["auroc"] for s in summaries if s["auroc"] is not None]
+    best_auroc = max(valid_aurocs) if valid_aurocs else None
 
     for s in summaries:
         ece_mark   = "★" if s["ece"]   == best_ece   else " "
